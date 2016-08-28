@@ -14,7 +14,7 @@
                 databaseURL: "https://based-marks.firebaseio.com",
                 storageBucket: "based-marks.appspot.com",
             }
-            firebase.initializeApp(config)
+            firebase.initializeApp(config);
 
             var extId = 'ipgmedlamljolebadedmkbfaaoaodkjg';
 
@@ -23,7 +23,9 @@
                     chrome.runtime.sendMessage(extId, {action: 'setAuth', val: {
                         credential: result.credential,
                         user: result.user.toJSON()
-                    }});
+                    }}, () => {
+                        window.close();
+                    });
                 } else {
                     var provider = new firebase.auth.GithubAuthProvider();
                     firebase.auth().signInWithRedirect(provider);
